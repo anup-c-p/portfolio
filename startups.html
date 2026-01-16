@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anup's Tablet — Startups</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <div class="fullscreen center">
+    <div class="device">
+      <div class="statusbar">
+        <div class="status-left"><span id="clockText"></span></div>
+        <div class="status-right" id="statusIcons"></div>
+      </div>
+
+      <div class="browser-wrap">
+        <div class="browser glass-strong">
+          <div class="browser-topbar">
+            <div class="traffic" aria-hidden="true">
+              <div class="dot"></div><div class="dot"></div><div class="dot"></div>
+            </div>
+
+            <div class="tabs">
+              <button class="tab active" data-tab="tab1">Rester</button>
+              <button class="tab" data-tab="tab2">Regen.ly</button>
+            </div>
+
+            <div class="urlbar" id="urlbar">https://anup.local/startups/rester</div>
+          </div>
+
+          <div class="browser-content">
+            <!-- =====================================================
+                 EDIT HERE: Page content for each tab
+                 ===================================================== -->
+            <div class="page active" id="tab1">
+              <h2>Rester</h2>
+              <p>Replace this with your startup landing content, screenshots, and metrics.</p>
+              <p><strong>Ideas:</strong> one-liner, problem, solution, traction, tech stack, links.</p>
+            </div>
+
+            <div class="page" id="tab2">
+              <h2>Regen.ly</h2>
+              <p>Replace this with your fintech/ML product details and visuals.</p>
+              <p><strong>Ideas:</strong> demo GIFs, pipeline diagram, user personas, roadmap.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dock liquid-glass" id="dock"></div>
+    </div>
+  </div>
+
+  <script type="module" src="assets/js/startups.js"></script>
+</body>
+</html>

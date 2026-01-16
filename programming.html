@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anup's Tablet — Programming</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <div class="fullscreen center">
+    <div class="device">
+      <div class="statusbar">
+        <div class="status-left"><span id="clockText"></span></div>
+        <div class="status-right" id="statusIcons"></div>
+      </div>
+
+      <div class="programming-layout">
+        <!-- Left: File system -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">File System</div>
+            <div style="opacity:.7; font-size:12px;">click a project</div>
+          </div>
+          <div class="fs" id="fs"></div>
+        </div>
+
+        <!-- Right: Viewer -->
+        <div class="panel">
+          <div class="panel-header">
+            <div class="panel-title">Project Viewer</div>
+            <div style="opacity:.7; font-size:12px;">details</div>
+          </div>
+          <div class="viewer" id="viewer">
+            <h2>Select a project</h2>
+            <p>Choose a file on the left to display project info here.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="dock liquid-glass" id="dock"></div>
+    </div>
+  </div>
+
+  <script type="module" src="assets/js/programming.js"></script>
+</body>
+</html>

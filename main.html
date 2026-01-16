@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Anup's Tablet — Main</title>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body>
+  <div class="fullscreen center">
+    <div class="device">
+      <!-- Wallpaper background (same as lock screen) -->
+      <div class="wallpaper" style="background-image:url('assets/img/wallpaper.jpg');"></div>
+
+      <!-- Status Bar -->
+      <div class="statusbar">
+        <div class="status-left">
+          <span id="clockText"></span>
+        </div>
+        <div class="status-right" id="statusIcons"></div>
+      </div>
+
+      <div class="homescreen">
+        <div class="app-grid">
+          <div class="apps soft-outline">
+            <!-- =====================================================
+                 APP ICONS (EDIT HERE)
+                 Replace icons in assets/img/icons/
+                 - app-video.png
+                 - app-programming.png
+                 - app-hardware.png
+                 - app-startups.png
+                 Use square images (512x512 recommended)
+                 ===================================================== -->
+            <a class="app-tile" href="video.html">
+              <div class="app-icon"><img src="assets/img/icons/app-video.png" alt="Video Editing icon"></div>
+              <div class="app-label">video editing</div>
+            </a>
+
+            <a class="app-tile" href="programming.html">
+              <div class="app-icon"><img src="assets/img/icons/app-programming.png" alt="Programming icon"></div>
+              <div class="app-label">programming</div>
+            </a>
+
+            <a class="app-tile" href="hardware.html">
+              <div class="app-icon"><img src="assets/img/icons/app-hardware.png" alt="Hardware icon"></div>
+              <div class="app-label">hardware</div>
+            </a>
+
+            <a class="app-tile" href="startups.html">
+              <div class="app-icon"><img src="assets/img/icons/app-startups.png" alt="Startups icon"></div>
+              <div class="app-label">startups</div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- (No dock on main page per your spec; dock appears on app pages) -->
+    </div>
+  </div>
+
+  <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+anup-tablet-portfolio/
+  index.html
+  main.html
+  video.html
+  programming.html
+  hardware.html
+  startups.html
+
+  assets/
+    css/
+      styles.css
+    js/
+      common.js
+      lock.js
+      main.js
+      video.js
+      programming.js
+      hardware.js
+      startups.js
+    img/
+      wallpaper.jpg
+      icons/
+        app-video.png
+        app-programming.png
+        app-hardware.png
+        app-startups.png
+      hardware/
+        hw1.jpg
+        hw2.jpg
+        hw3.jpg
+        hw4.jpg
+        hw5.jpg
+        hw6.jpg
