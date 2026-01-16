@@ -57,11 +57,22 @@ export function batterySVG() {
   </svg>`;
 }
 
+
 export function lockSVG() {
+  // IMPORTANT: the shackle path has id="lockShackle" so CSS can animate it.
   return `
-  <svg class="lock-icon" viewBox="0 0 24 24" fill="none">
-    <path d="M7.5 10.2V8.4a4.5 4.5 0 0 1 9 0v1.8" stroke="white" opacity="0.95" stroke-width="2" stroke-linecap="round"/>
-    <rect x="6.2" y="10.2" width="11.6" height="9.8" rx="2.2" stroke="white" opacity="0.95" stroke-width="2"/>
+  <svg class="lock-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <!-- Shackle -->
+    <path id="lockShackle"
+      d="M8 10V7.8C8 5.7 9.8 4 12 4s4 1.7 4 3.8V10"
+      stroke="white" opacity="0.95" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Body -->
+    <path
+      d="M7 10h10a2 2 0 0 1 2 2v6.5A2.5 2.5 0 0 1 16.5 21h-9A2.5 2.5 0 0 1 5 18.5V12a2 2 0 0 1 2-2Z"
+      stroke="white" opacity="0.95" stroke-width="2" stroke-linejoin="round"/>
+
+    <!-- Keyhole -->
     <path d="M12 14.2v2.6" stroke="white" opacity="0.95" stroke-width="2" stroke-linecap="round"/>
   </svg>`;
 }

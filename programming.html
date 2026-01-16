@@ -4,9 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Anup's Tablet — Programming</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
-<body>
+<body class="programming-page">
   <div class="fullscreen center">
     <div class="device">
       <div class="statusbar">
@@ -14,30 +19,50 @@
         <div class="status-right" id="statusIcons"></div>
       </div>
 
-      <div class="programming-layout">
-        <!-- Left: File system -->
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-title">File System</div>
-            <div style="opacity:.7; font-size:12px;">click a project</div>
-          </div>
-          <div class="fs" id="fs"></div>
-        </div>
+      <div class="page-title">Programming</div>
 
-        <!-- Right: Viewer -->
-        <div class="panel">
-          <div class="panel-header">
-            <div class="panel-title">Project Viewer</div>
-            <div style="opacity:.7; font-size:12px;">details</div>
-          </div>
-          <div class="viewer" id="viewer">
-            <h2>Select a project</h2>
-            <p>Choose a file on the left to display project info here.</p>
-          </div>
+      <div class="programming-layout">
+        <div class="panel fs" id="fs"></div>
+        <div class="panel viewer" id="viewer">
+          <h2>Select a file</h2>
+          <p>Click a project on the left to view details here.</p>
         </div>
       </div>
 
-      <div class="dock liquid-glass" id="dock"></div>
+      <nav class="dock liquid-glass" aria-label="App Dock">
+        <div class="dock-left">
+          <a class="dock-btn" href="main.html" aria-label="Home">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 10.6 12 4l8 6.6V20a1.6 1.6 0 0 1-1.6 1.6H5.6A1.6 1.6 0 0 1 4 20v-9.4Z"
+                stroke="white" opacity="0.92" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M9.5 21v-7h5v7" stroke="white" opacity="0.92" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <div class="dock-label">Home</div>
+          </a>
+        </div>
+
+        <div class="dock-right">
+          <a class="dock-btn" href="video.html" aria-label="Video Editing">
+            <img src="assets/img/icons/app-video.png" alt="Video" loading="lazy" />
+            <div class="dock-label">Video</div>
+          </a>
+
+          <a class="dock-btn active" href="programming.html" aria-label="Programming">
+            <img src="assets/img/icons/app-programming.png" alt="Programming" loading="lazy" />
+            <div class="dock-label">Code</div>
+          </a>
+
+          <a class="dock-btn" href="hardware.html" aria-label="Hardware">
+            <img src="assets/img/icons/app-hardware.png" alt="Hardware" loading="lazy" />
+            <div class="dock-label">Hardware</div>
+          </a>
+
+          <a class="dock-btn" href="startups.html" aria-label="Startups">
+            <img src="assets/img/icons/app-startups.png" alt="Startups" loading="lazy" />
+            <div class="dock-label">Startups</div>
+          </a>
+        </div>
+      </nav>
     </div>
   </div>
 

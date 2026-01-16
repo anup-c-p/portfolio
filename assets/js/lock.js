@@ -1,5 +1,10 @@
-const btn = document.getElementById("lockBtn");
-const device = document.querySelector(".device");
+import { $, lockSVG } from "./common.js";
+
+const device = $("#lockRoot");
+const btn = $("#lockBtn");
+
+// Inline SVG (no extra requests)
+btn.innerHTML = lockSVG();
 
 let unlocking = false;
 
@@ -9,7 +14,7 @@ btn.addEventListener("click", () => {
 
   device.classList.add("unlocking");
 
-  // Slower, so you SEE the lift + ripple + open
+  // Matches the slower shackle + glass ripple animation in CSS
   setTimeout(() => {
     window.location.href = "main.html";
   }, 1850);

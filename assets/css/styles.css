@@ -9,7 +9,6 @@
    ========================================================= */
 
 /* Inter (readability) */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
 /* =========================================================
    THEME VARIABLES (EDIT COLORS HERE)
@@ -252,72 +251,17 @@ a { color: inherit; text-decoration: none; }
 
 .lock-icon { width: 28px; height: 28px; opacity: 0.95; }
 
-
-/* =========================================================
-   LOCK UNLOCK ANIMATION (SLOWER + GLASS RIPPLE + HIGHER SHACKLE LIFT)
-   Requires the shackle path in your lock SVG to have: id="lockShackle"
-   ========================================================= */
-
-/* Shackle: lift up first, then swing open, then drift away */
-.unlocking #lockShackle {
-  transform-origin: 12px 10px;
-  animation: shackleLiftAndOpen 1600ms cubic-bezier(.18,.75,.24,1) forwards;
-}
-
-@keyframes shackleLiftAndOpen {
-  0% { transform: rotate(0deg) translate(0, 0); opacity: 1; }
-  30% { transform: rotate(0deg) translate(0, -12px); opacity: 1; }
-  48% { transform: rotate(0deg) translate(0, -18px); opacity: 1; }
-  72% { transform: rotate(-38deg) translate(-4px, -20px); opacity: 0.92; }
-  100% { transform: rotate(-62deg) translate(-8px, -28px); opacity: 0; }
-}
-
-/* Glass ripple from the lock button */
-.lock-button {
-  overflow: visible;
-}
-
-.unlocking .lock-button::after {
-  content: "";
-  position: absolute;
-  inset: 50%;
-  width: 12px;
-  height: 12px;
-  border-radius: 999px;
-  transform: translate(-50%, -50%) scale(0.6);
-  pointer-events: none;
-
-  background: radial-gradient(
-    circle,
-    rgba(255,255,255,0.40) 0%,
-    rgba(45,212,255,0.28) 22%,
-    rgba(124,92,255,0.18) 44%,
-    rgba(255,255,255,0.00) 70%
-  );
-
-  opacity: 0;
-  animation: glassRipple 2100ms cubic-bezier(.16,.82,.22,1) forwards;
-}
-
-@keyframes glassRipple {
-  0% { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
-  12% { opacity: 0.85; transform: translate(-50%, -50%) scale(1.2); }
-  55% { opacity: 0.55; transform: translate(-50%, -50%) scale(7.2); }
-  100% { opacity: 0; transform: translate(-50%, -50%) scale(12.0); }
-}
-
-/* Slow the overall lock-screen transition a bit for readability */
-.unlocking .wallpaper { animation: unlockFade 1800ms ease forwards; }
+/* Unlock animation */
+.unlocking .wallpaper { animation: unlockFade 550ms ease forwards; }
 .unlocking .lock-top-title,
 .unlocking .lock-hint,
-.unlocking .lock-button { animation: unlockSlide 1600ms ease forwards; }
+.unlocking .lock-button { animation: unlockSlide 500ms ease forwards; }
 
 @keyframes unlockFade {
-  to { filter: blur(10px) brightness(0.74); transform: scale(1.08); }
+  to { filter: blur(8px) brightness(0.78); transform: scale(1.10); }
 }
-
 @keyframes unlockSlide {
-  to { transform: translateX(-50%) translateY(26px); opacity: 0; }
+  to { transform: translateX(-50%) translateY(20px); opacity: 0; }
 }
 
 /* =========================================================
@@ -601,6 +545,7 @@ a { color: inherit; text-decoration: none; }
 }
 
 .video-card {
+  position: relative; /* required for overlay */
   border-radius: 20px;
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.14);
@@ -610,58 +555,49 @@ a { color: inherit; text-decoration: none; }
   transition: transform 200ms ease, box-shadow 200ms ease, border-color 200ms ease;
 }
 
-/*
-  IMPORTANT (PATCH):
-  Wrap the iframe + overlay in a .video-frame so the "Tap to select" pill centers
-  over the VIDEO area only (not including the title block below).
-
-  Expected structure:
-    <div class="video-card">
-      <div class="video-frame">
-        <div class="video-overlay"></div>
-        <iframe class="video-embed" ...></iframe>
-      </div>
-      <div class="video-title">...</div>
-    </div>
-*/
-.video-frame {
-  position: relative;
-  width: 100%;
-}
-
-/*
-  Video overlay behavior (PATCH):
-  - When NOT active: overlay blocks the iframe so the video can't be played
-    and the entire tile is clickable to activate.
-  - When active: overlay disappears so the user can interact with the iframe.
-  - "Tap to select" pill is centered via flex (always true center).
-*/
+/* overlay blocks interaction when NOT active */
 .video-overlay {
   position: absolute;
   inset: 0;
   z-index: 2;
   cursor: pointer;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  /* subtle glass sheen */
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,0.08),
-    rgba(0,0,0,0.12)
-  );
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  background: transparent; /* can be glassy if you want */
 }
 
 .video-overlay::after {
-  content: none;
+  content: "Tap to select";
+  position: absolute;
+
+  /* ✅ perfect center */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  padding: 8px 14px;
+  border-radius: 999px;
+
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  opacity: 0.9;
+
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  box-shadow:
+    0 8px 30px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.25);
+
+  pointer-events: none; /* click passes through to overlay */
 }
 
 .video-card:hover { transform: translateY(-3px); }
 
+.video-card:hover .video-overlay::after {
+  opacity: 1;
+}
 
 .video-card.active {
   transform: scale(1.08);
@@ -687,6 +623,49 @@ a { color: inherit; text-decoration: none; }
   color: var(--video-title);
   font-size: 14px;
   opacity: 0.92;
+}
+
+/* =========================================================
+   VIDEO OVERLAY (requested behavior)
+   - If NOT active: overlay blocks iframe so it cannot play
+   - Whole card is clickable to activate
+   ========================================================= */
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  cursor: pointer;
+
+  /* subtle glass sheen (looks intentional) */
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.08),
+    rgba(0,0,0,0.12)
+  );
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* When active, allow interaction with iframe */
+.video-card.active .video-overlay {
+  display: none;
+}
+
+/* Optional hint pill */
+.video-overlay::after {
+  content: "Tap to select";
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+
+  font-size: 12px;
+  letter-spacing: 0.2px;
+  opacity: 0.85;
+
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.16);
 }
 
 /* =========================================================
@@ -935,3 +914,60 @@ a { color: inherit; text-decoration: none; }
 
 .page h2 { margin: 0 0 10px; }
 .page p { margin: 8px 0; line-height: 1.45; opacity: 0.92; }
+
+/* =========================================================
+   PATCH OVERRIDES (performance + latest behavior)
+   - Remove "Tap to select" pill (keep overlay for click-to-select + blocking)
+   - Ensure overlay centers against VIDEO AREA only using .video-frame wrapper
+   - Lock: slower unlock + higher shackle lift + glass ripple
+   ========================================================= */
+
+/* Ensure .video-frame exists even if older CSS didn’t define it */
+.video-frame{position:relative;width:100%;}
+
+/* Remove visual pill/hint entirely */
+.video-overlay::after{content:none !important;}
+
+/* Lock shackle animation (requires #lockShackle in SVG) */
+.unlocking #lockShackle{
+  transform-origin:12px 10px;
+  animation:shackleLiftAndOpen 1600ms cubic-bezier(.18,.75,.24,1) forwards;
+}
+
+@keyframes shackleLiftAndOpen{
+  0%{transform:rotate(0deg) translate(0,0);opacity:1;}
+  30%{transform:rotate(0deg) translate(0,-12px);opacity:1;}
+  48%{transform:rotate(0deg) translate(0,-18px);opacity:1;}
+  72%{transform:rotate(-38deg) translate(-4px,-20px);opacity:.92;}
+  100%{transform:rotate(-62deg) translate(-8px,-28px);opacity:0;}
+}
+
+/* Glass ripple from lock button */
+.unlocking .lock-button{overflow:visible;}
+.unlocking .lock-button::after{
+  content:"";
+  position:absolute;
+  inset:50%;
+  width:12px;
+  height:12px;
+  border-radius:999px;
+  transform:translate(-50%,-50%) scale(.6);
+  pointer-events:none;
+  background:radial-gradient(circle,
+    rgba(255,255,255,.40) 0%,
+    rgba(45,212,255,.28) 22%,
+    rgba(124,92,255,.18) 44%,
+    rgba(255,255,255,0) 70%
+  );
+  opacity:0;
+  animation:glassRipple 1800ms cubic-bezier(.16,.82,.22,1) forwards;
+}
+
+@keyframes glassRipple{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.6);}
+  12%{opacity:.85;transform:translate(-50%,-50%) scale(1.1);}
+  55%{opacity:.55;transform:translate(-50%,-50%) scale(6.2);}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(10.5);}
+}
+
+

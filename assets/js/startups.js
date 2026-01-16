@@ -1,5 +1,4 @@
 import { $, $all, mountStatusBarClock, wifiSVG, batterySVG } from "./common.js";
-import { renderDock } from "./commonDock.js";
 
 mountStatusBarClock($("#clockText"));
 $("#statusIcons").innerHTML = wifiSVG() + batterySVG();
@@ -33,4 +32,3 @@ tabs.forEach(t => {
   });
 });
 
-renderDock($("#dock"), "startups");

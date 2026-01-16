@@ -1,5 +1,4 @@
 import { $, mountStatusBarClock, wifiSVG, batterySVG } from "./common.js";
-import { renderDock } from "./commonDock.js";
 
 mountStatusBarClock($("#clockText"));
 $("#statusIcons").innerHTML = wifiSVG() + batterySVG();
@@ -46,4 +45,3 @@ $("#nextBtn").addEventListener("click", () => {
 });
 
 render();
-renderDock($("#dock"), "hardware");

@@ -3,59 +3,54 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Anup's Tablet — Main</title>
+  <title>Anup's Tablet — Home</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
+  <!-- Preload app icons for snappy first paint -->
+  <link rel="preload" as="image" href="assets/img/icons/app-video.png" />
+  <link rel="preload" as="image" href="assets/img/icons/app-programming.png" />
+  <link rel="preload" as="image" href="assets/img/icons/app-hardware.png" />
+  <link rel="preload" as="image" href="assets/img/icons/app-startups.png" />
+
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
-<body>
+<body class="main-page">
   <div class="fullscreen center">
     <div class="device">
-      <!-- Wallpaper background (same as lock screen) -->
-      <div class="wallpaper" style="background-image:url('assets/img/wallpaper.jpg');"></div>
-
-      <!-- Status Bar -->
       <div class="statusbar">
-        <div class="status-left">
-          <span id="clockText"></span>
-        </div>
+        <div class="status-left"><span id="clockText"></span></div>
         <div class="status-right" id="statusIcons"></div>
       </div>
 
       <div class="homescreen">
         <div class="app-grid">
-          <div class="apps soft-outline">
-            <!-- =====================================================
-                 APP ICONS (EDIT HERE)
-                 Replace icons in assets/img/icons/
-                 - app-video.png
-                 - app-programming.png
-                 - app-hardware.png
-                 - app-startups.png
-                 Use square images (512x512 recommended)
-                 ===================================================== -->
-            <a class="app-tile" href="video.html">
-              <div class="app-icon"><img src="assets/img/icons/app-video.png" alt="Video Editing icon"></div>
-              <div class="app-label">video editing</div>
+          <div class="apps">
+            <!-- EDIT HERE: swap icons in assets/img/icons/ -->
+            <a class="app-tile" href="video.html" aria-label="Video Editing">
+              <img class="app-icon" src="assets/img/icons/app-video.png" alt="Video Editing" loading="eager" />
+              <div class="app-label">Video Editing</div>
             </a>
 
-            <a class="app-tile" href="programming.html">
-              <div class="app-icon"><img src="assets/img/icons/app-programming.png" alt="Programming icon"></div>
-              <div class="app-label">programming</div>
+            <a class="app-tile" href="programming.html" aria-label="Programming">
+              <img class="app-icon" src="assets/img/icons/app-programming.png" alt="Programming" loading="eager" />
+              <div class="app-label">Programming</div>
             </a>
 
-            <a class="app-tile" href="hardware.html">
-              <div class="app-icon"><img src="assets/img/icons/app-hardware.png" alt="Hardware icon"></div>
-              <div class="app-label">hardware</div>
+            <a class="app-tile" href="hardware.html" aria-label="Hardware">
+              <img class="app-icon" src="assets/img/icons/app-hardware.png" alt="Hardware" loading="eager" />
+              <div class="app-label">Hardware</div>
             </a>
 
-            <a class="app-tile" href="startups.html">
-              <div class="app-icon"><img src="assets/img/icons/app-startups.png" alt="Startups icon"></div>
-              <div class="app-label">startups</div>
+            <a class="app-tile" href="startups.html" aria-label="Startups">
+              <img class="app-icon" src="assets/img/icons/app-startups.png" alt="Startups" loading="eager" />
+              <div class="app-label">Startups</div>
             </a>
           </div>
         </div>
       </div>
-
-      <!-- (No dock on main page per your spec; dock appears on app pages) -->
     </div>
   </div>
 

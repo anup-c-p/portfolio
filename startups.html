@@ -4,9 +4,14 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Anup's Tablet — Startups</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" />
+
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
-<body>
+<body class="startups-page">
   <div class="fullscreen center">
     <div class="device">
       <div class="statusbar">
@@ -15,40 +20,80 @@
       </div>
 
       <div class="browser-wrap">
-        <div class="browser glass-strong">
-          <div class="browser-topbar">
-            <div class="traffic" aria-hidden="true">
-              <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-            </div>
+        <div class="browser liquid-glass">
+          <div class="tabs">
+            <button class="tab active" data-tab="tab1">Rester</button>
+            <button class="tab" data-tab="tab2">Regen.ly</button>
+          </div>
 
-            <div class="tabs">
-              <button class="tab active" data-tab="tab1">Rester</button>
-              <button class="tab" data-tab="tab2">Regen.ly</button>
+          <div class="urlbar">
+            <div class="url-left">
+              <span class="dot red"></span>
+              <span class="dot yellow"></span>
+              <span class="dot green"></span>
             </div>
-
-            <div class="urlbar" id="urlbar">https://anup.local/startups/rester</div>
+            <div class="url" id="urlbar">https://anup.local/startups/rester</div>
           </div>
 
           <div class="browser-content">
-            <!-- =====================================================
-                 EDIT HERE: Page content for each tab
-                 ===================================================== -->
             <div class="page active" id="tab1">
+              <!-- EDIT HERE: Tab 1 content -->
               <h2>Rester</h2>
-              <p>Replace this with your startup landing content, screenshots, and metrics.</p>
-              <p><strong>Ideas:</strong> one-liner, problem, solution, traction, tech stack, links.</p>
+              <p>Sleep optimization platform using wearable data + AI insights.</p>
+              <ul>
+                <li>Freemium tiering + personalized coaching</li>
+                <li>Focus: recovery, consistency, and lifestyle habits</li>
+              </ul>
             </div>
 
             <div class="page" id="tab2">
+              <!-- EDIT HERE: Tab 2 content -->
               <h2>Regen.ly</h2>
-              <p>Replace this with your fintech/ML product details and visuals.</p>
-              <p><strong>Ideas:</strong> demo GIFs, pipeline diagram, user personas, roadmap.</p>
+              <p>Portfolio analysis tool combining historical market data + ML sentiment.</p>
+              <ul>
+                <li>Backtesting + explainable insights</li>
+                <li>Dashboards for performance and risk</li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="dock liquid-glass" id="dock"></div>
+      <!-- Dock (static HTML = faster + no JS injection) -->
+      <nav class="dock liquid-glass" aria-label="App Dock">
+        <div class="dock-left">
+          <a class="dock-btn" href="main.html" aria-label="Home">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M4 10.6 12 4l8 6.6V20a1.6 1.6 0 0 1-1.6 1.6H5.6A1.6 1.6 0 0 1 4 20v-9.4Z"
+                stroke="white" opacity="0.92" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M9.5 21v-7h5v7" stroke="white" opacity="0.92" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <div class="dock-label">Home</div>
+          </a>
+        </div>
+
+        <div class="dock-right">
+          <a class="dock-btn" href="video.html" aria-label="Video Editing">
+            <img src="assets/img/icons/app-video.png" alt="Video" loading="lazy" />
+            <div class="dock-label">Video</div>
+          </a>
+
+          <a class="dock-btn" href="programming.html" aria-label="Programming">
+            <img src="assets/img/icons/app-programming.png" alt="Programming" loading="lazy" />
+            <div class="dock-label">Code</div>
+          </a>
+
+          <a class="dock-btn" href="hardware.html" aria-label="Hardware">
+            <img src="assets/img/icons/app-hardware.png" alt="Hardware" loading="lazy" />
+            <div class="dock-label">Hardware</div>
+          </a>
+
+          <a class="dock-btn active" href="startups.html" aria-label="Startups">
+            <img src="assets/img/icons/app-startups.png" alt="Startups" loading="lazy" />
+            <div class="dock-label">Startups</div>
+          </a>
+        </div>
+      </nav>
     </div>
   </div>
 

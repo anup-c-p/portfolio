@@ -1,16 +1,13 @@
 import { $, mountStatusBarClock, wifiSVG, batterySVG } from "./common.js";
-import { renderDock } from "./commonDock.js";
 
 mountStatusBarClock($("#clockText"));
 $("#statusIcons").innerHTML = wifiSVG() + batterySVG();
 
-// =====================================================
-// EDIT HERE: YouTube URLs
-// =====================================================
+// EDIT HERE: Replace url/title with your own videos.
 const videos = [
-  { url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ" },
-  { url: "https://www.youtube.com/watch?v=ysz5S6PUM-U" },
-  { url: "https://www.youtube.com/watch?v=jNQXAC9IVRw" },
+  { url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ", title: "Video 1" },
+  { url: "https://www.youtube.com/watch?v=ysz5S6PUM-U", title: "Video 2" },
+  { url: "https://www.youtube.com/watch?v=jNQXAC9IVRw", title: "Video 3" }
 ];
 
 function toEmbed(url) {
@@ -22,92 +19,71 @@ function toEmbed(url) {
   return `https://www.youtube.com/embed/${id}`;
 }
 
-// Title via oEmbed (no key)
-async function fetchTitle(url) {
-  try {
-    const oembed = `https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`;
-    const res = await fetch(oembed);
-    if (!res.ok) throw new Error("oEmbed failed");
-    const data = await res.json();
-    return data.title || "Untitled";
-  } catch {
-    return "Video Title (edit manually if needed)";
-  }
-}
-
 const row = $("#videoRow");
 
-// --- Stops playback reliably by resetting iframe src
-function stopVideo(card) {
+function setIframeSrc(card, src) {
   const iframe = card.querySelector("iframe");
-  const embed = card.dataset.embed;
-  iframe.src = embed; // reset to stop playback
+  if (!iframe) return;
+  if (iframe.src !== src) iframe.src = src;
 }
 
-// --- Activate one card, deactivate others (and stop them)
 function setActive(index) {
   const cards = [...row.querySelectorAll(".video-card")];
 
-  cards.forEach((c, i) => {
-    const isCurrentlyActive = c.classList.contains("active");
+  cards.forEach((card, i) => {
     const willBeActive = i === index;
+    const embed = card.dataset.embed;
 
-    // If we're turning a card OFF, stop it
-    if (isCurrentlyActive && !willBeActive) {
-      stopVideo(c);
+    card.classList.toggle("active", willBeActive);
+
+    if (willBeActive) {
+      // Active: load the video
+      setIframeSrc(card, embed);
+    } else {
+      // Inactive: stop playback + prevent interaction
+      setIframeSrc(card, "about:blank");
     }
-
-    c.classList.toggle("active", willBeActive);
   });
 }
 
-(async function render() {
-  const titled = await Promise.all(
-    videos.map(async (v) => ({ ...v, title: await fetchTitle(v.url) }))
-  );
+function render() {
+  row.innerHTML = videos
+    .map((v, i) => {
+      const embed = toEmbed(v.url);
+      const src = i === 0 ? embed : "about:blank"; // only load first on initial page load
 
-  row.innerHTML = titled.map((v, i) => {
-    const embed = toEmbed(v.url);
-    return `
-      <div class="video-card ${i === 0 ? "active" : ""}" data-index="${i}" data-embed="${embed}">
-        <!--
-          IMPORTANT (CSS patch dependency):
-          Wrap the iframe + overlay in .video-frame so the "Tap to select" pill centers
-          over the VIDEO AREA only (not including the title block).
-
-          Also: overlay blocks all interaction with the iframe when not active,
-          so clicking anywhere on the panel highlights it.
-        -->
-        <div class="video-frame">
-          <div class="video-overlay" aria-label="Select video"></div>
-          <iframe class="video-embed"
-            src="${embed}"
-            title="${v.title}"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen></iframe>
+      return `
+        <div class="video-card ${i === 0 ? "active" : ""}" data-index="${i}" data-embed="${embed}">
+          <div class="video-frame">
+            <div class="video-overlay" aria-label="Select video"></div>
+            <iframe
+              class="video-embed"
+              src="${src}"
+              loading="lazy"
+              title="${v.title}"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="video-title">${v.title}</div>
         </div>
-
-        <div class="video-title">${v.title}</div>
-      </div>
-    `;
-  }).join("");
+      `;
+    })
+    .join("");
 
   // Default active: first
   setActive(0);
 
-  // Click anywhere on a card (including where the video is when not highlighted)
+  // Click anywhere on a card. If it is not active, activate it.
   row.addEventListener("click", (e) => {
     const card = e.target.closest(".video-card");
     if (!card) return;
 
+    if (card.classList.contains("active")) return; // let the user interact with the active iframe
+
     const idx = Number(card.dataset.index);
-
-    // If you click a NON-active card -> activate it
-    if (!card.classList.contains("active")) {
-      setActive(idx);
-    }
-    // If active, do nothing (let the user interact with the video)
+    setActive(idx);
   });
-})();
+}
 
-renderDock($("#dock"), "video");
+render();
